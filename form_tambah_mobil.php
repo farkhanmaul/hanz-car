@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-$sql = "SELECT * FROM user ORDER BY level";
+$sql = "SELECT * FROM transaksi ORDER BY id";
 $tampil = mysqli_query($con, $sql);
 
 session_start();
@@ -16,7 +16,8 @@ if ($_SESSION['level'] != 'ADMIN') {
 }
 
 // Syntax untuk mengambil semua data dari table mahasiswa
-$result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
+$result = mysqli_query($con, "SELECT * FROM transaksi order by tgl_sewa");
+
 ?>
 
 <html>
@@ -75,69 +76,34 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
 
             <div class="container">
                 <div class="info-wrap mt-5">
-
                     <div class="row">
                         <div class="section-title">
-                            <h2>List Mobil</h2>
+                            <h2>Tambah Mobil</h2>
                         </div>
                     </div>
                 </div>
 
-                <form action="" method="GET" style="margin-top: 1em">
-                    <input style="padding:1em 2em; width:100%;" type="text" name="cari_user" placeholder="Cari Data Berdasarkan Nama" defaultValue="">
+                <form action="proses/mobil_register.php" method="post" class="php-email-form">
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="tipe" placeholder="Nama Mobil">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="transmisi" placeholder="Transmisi">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="tahun" placeholder="Tahun Mobil">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="harga" placeholder="Harga">
+                    </div>
+
+                    <button type="submit" class="text-center">Tambah</button>
                 </form>
-                <form action="admin_show_user.php" class="php-email-form">
-
-                    <?php
-                    if (isset($_GET['cari_user'])) :
-                        $cari_user = $_GET['cari_user'];
-                        $result = mysqli_query($con, "SELECT * FROM mobil WHERE tipe LIKE '%$cari_user%'  ");
-                    endif; ?>
-
-                    <?php if ($result->num_rows > 0) :
-
-                    ?>
-
-
-                        <table width='80%' border=1 class="table table-striped">
-                            <tr>
-                                <th>Tipe</th>
-                                <th>Transmisi</th>
-                                <th>Tahun</th>
-                                <th>Harga (Rp.)</th>
-                                <th>Aksi</th>
-                            </tr>
-                            <?php
-                            while ($user_data = mysqli_fetch_array($result)) {
-                                echo "<tr>";
-                                echo "<td>" . $user_data['tipe'] . "</td>";
-                                echo "<td>" . $user_data['transmisi'] . "</td>";
-                                echo "<td>" . $user_data['tahun'] . "</td>";
-                                echo "<td>" . $user_data['harga'] . "</td>";
-                                echo "<td><a href='mobil_edit.php?id=$user_data[id]'>Edit</a> | <a href='mobil_delete.php?id=$user_data[id]'>Hapus</a>
-                    </td></tr>";
-                            }
-                            ?>
-                        </table>
-                    <?php else : ?>
-                        <table width='80%' border=1>
-                            <tr>
-                                <th>Tipe</th>
-                                <th>Transmisi</th>
-                                <th>Tahun</th>
-                                <th>Harga (Rp.)</th>
-                                <th>Aksi</th>
-                            </tr>
-                            <tr>
-                                <td colspan="5" align="center">Data tidak di temukan!</td>
-                            </tr>
-                        </table>
-                    <?php endif; ?>
-
-                </form>
-                <a href="index.php"><button class="btn btn-danger">Back</button></a>
-                <a href="cetak_mobil.php"><button class="btn btn-primary">Cetak Tabel Mobil</button></a>
-                <a href="form_tambah_mobil.php"><button class="btn btn-primary"> Tambah Mobil</button></a>
+                <a href="index_home.php"><button class="btn btn-danger">Back</button></a>
             </div>
         </section><!-- End Contact Section -->
 

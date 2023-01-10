@@ -1,23 +1,39 @@
 <?php
-include "koneksi.php";
-$sql = "SELECT * FROM user ORDER BY level";
-$tampil = mysqli_query($con, $sql);
+// Memanggil file koneksi.php
+include_once("koneksi.php");
 
-session_start();
+// Perkondisian untuk mengecek apakah tombol submit sudah ditekan.
+if (isset($_POST['update'])) {
+    $tipe = $_POST['tipe'];
+    $transmisi = $_POST['transmisi'];
+    $tahun = $_POST['tahun'];
+    $harga = $_POST['harga'];
 
-if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
-    header('Location: form_login.php');
-    die();
+    // Syntax untuk mengupdate data user berdasarkan id
+    $result = mysqli_query($con, "UPDATE mobil SET tipe='$tipe',transmisi='$transmisi',tahun='$tahun',harga='$harga' WHERE id='$id'");
+
+    // Redirect ke index.php
+    header("Location: index.php");
 }
+?>
+<?php
+// Menampilkan data berdasarkan data yang kita pilih.
 
-if ($_SESSION['level'] != 'ADMIN') {
-    header('Location: proses/page_error.php');
-    die();
+// Mengambil id dari url
+$id = $_GET['id'];
+
+// Syntax untuk mengambil data berdasarkan id
+$result = mysqli_query($con, "SELECT * FROM mobil WHERE id='$id'");
+while ($user_data = mysqli_fetch_array($result)) {
+    $tipe = $user_data['tipe'];
+    $transmisi = $user_data['transmisi'];
+    $tahun = $user_data['tahun'];
+    $harga = $user_data['harga'];
 }
-
 ?>
 
-<!DOCTYPE html>
+
+<html>
 <html lang="en">
 
 <head>
@@ -75,21 +91,33 @@ if ($_SESSION['level'] != 'ADMIN') {
                 <div class="info-wrap mt-5">
                     <div class="row">
                         <div class="section-title">
-                            <h2>HALAMAN ADMIN</h2>
+                            <h2>Edit User</h2>
                         </div>
                     </div>
                 </div>
 
-                <form action="" method="post" class="php-email-form">
 
-                    <p>Anda login sebagai <b>Admin</b></p>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href='admin_show_user.php'><button type="button" class="btn btn-primary">Edit User</button></a>
-                        <a href='admin_show_mobil.php'><button type="button" class="btn btn-primary">Edit Mobil</button></a>
-                        <a href='admin_show_transaksi.php'><button type="button" class="btn btn-primary">Lihat Transaksi</button></a>
-                        <a href='proses/user_logout.php'><button type="button" class="btn btn-danger">Logout</button></a>
+                <form action="mobil_edit.php" method="post" class="php-email-form">
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="tipe" placeholder="Nama Mobil" value=<?php echo $tipe; ?>>
                     </div>
-                    </p>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="transmisi" placeholder="Transmisi" value=<?php echo $transmisi; ?>>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="tahun" placeholder="Tahun Mobil" value=<?php echo $tahun; ?>>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="harga" placeholder="Harga" value=<?php echo $harga; ?>>
+                    </div>
+
+                    <input type="hidden" name="id" value=<?php echo $id ?>>
+                    <button type="submit" class="text-center" name="update" value="update">Update</button>
+                    <a href="index.php">Cancel</a>
                 </form>
             </div>
         </section><!-- End Contact Section -->

@@ -10,10 +10,6 @@ if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
     die();
 }
 
-if ($_SESSION['level'] != 'ADMIN') {
-    header('Location: proses/page_error.php');
-    die();
-}
 
 // Syntax untuk mengambil semua data dari table mahasiswa
 $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
@@ -78,7 +74,7 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
 
                     <div class="row">
                         <div class="section-title">
-                            <h2>List Mobil</h2>
+                            <h2>List User</h2>
                         </div>
                     </div>
                 </div>
@@ -105,7 +101,6 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
                                 <th>Transmisi</th>
                                 <th>Tahun</th>
                                 <th>Harga (Rp.)</th>
-                                <th>Aksi</th>
                             </tr>
                             <?php
                             while ($user_data = mysqli_fetch_array($result)) {
@@ -114,8 +109,6 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
                                 echo "<td>" . $user_data['transmisi'] . "</td>";
                                 echo "<td>" . $user_data['tahun'] . "</td>";
                                 echo "<td>" . $user_data['harga'] . "</td>";
-                                echo "<td><a href='mobil_edit.php?id=$user_data[id]'>Edit</a> | <a href='mobil_delete.php?id=$user_data[id]'>Hapus</a>
-                    </td></tr>";
                             }
                             ?>
                         </table>
@@ -126,10 +119,9 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
                                 <th>Transmisi</th>
                                 <th>Tahun</th>
                                 <th>Harga (Rp.)</th>
-                                <th>Aksi</th>
                             </tr>
                             <tr>
-                                <td colspan="5" align="center">Data tidak di temukan!</td>
+                                <td colspan="4" align="center">Data tidak di temukan!</td>
                             </tr>
                         </table>
                     <?php endif; ?>
@@ -137,7 +129,6 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
                 </form>
                 <a href="index.php"><button class="btn btn-danger">Back</button></a>
                 <a href="cetak_mobil.php"><button class="btn btn-primary">Cetak Tabel Mobil</button></a>
-                <a href="form_tambah_mobil.php"><button class="btn btn-primary"> Tambah Mobil</button></a>
             </div>
         </section><!-- End Contact Section -->
 

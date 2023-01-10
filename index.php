@@ -82,6 +82,7 @@ $result = mysqli_query($con, "SELECT * FROM user WHERE username = '$_SESSION[use
           ?>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="about.php">About</a></li>
+          <li><a class="nav-link scrollto" href="user_show_mobil.php">Daftar Mobil</a></li>
           <li><a class="nav-link scrollto" href="form_transaksi.php?id=<?php echo "$user_data[id]\">Reservasi</a></li>" ?>
 
           <li><a class=" nav-link scrollto" href="proses/user_logout.php">Logout</a></li>

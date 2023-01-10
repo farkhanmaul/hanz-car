@@ -137,7 +137,7 @@ $result = mysqli_query($con, "SELECT * FROM user ");
                     <?php endif; ?>
 
                 </form>
-                <a href="admin_home.php"><button class="btn btn-danger">Back</button></a>
+                <a href="index.php"><button class="btn btn-danger">Back</button></a>
                 <a href="cetak_user.php"><button class="btn btn-primary">Cetak Tabel User</button></a>
             </div>
         </section><!-- End Contact Section -->
