@@ -1,16 +1,28 @@
 <?php
-include "koneksi.php";
-$sql = "SELECT * FROM mobil";
-$tampil = mysqli_query($con, $sql);
+// Memanggil file koneksi.php
+include_once("koneksi.php");
 
-session_start();
+// Perkondisian untuk mengecek apakah tombol submit sudah ditekan.
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $nama = $_POST['nama'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $alamat = $_POST['alamat'];
+    $tgl_lahir = $_POST['tgl_lahir'];
 
-if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
-    header('Location: form_login.php');
-    die();
+    // Syntax untuk mengupdate data user berdasarkan id
+    $result = mysqli_query($con, "UPDATE user SET nama='$nama',jenis_kelamin='$jenis_kelamin',alamat='$alamat',tgl_lahir='$tgl_lahir' WHERE id='$id'");
+
+    // Redirect ke index.php
+    header("Location: index.php");
 }
+?>
+<?php
+// Menampilkan data berdasarkan data yang kita pilih.
 
+// Mengambil id dari url
 $id = $_GET['id'];
+
 // Syntax untuk mengambil data berdasarkan id
 $result = mysqli_query($con, "SELECT * FROM user WHERE id='$id'");
 while ($user_data = mysqli_fetch_array($result)) {
@@ -20,17 +32,9 @@ while ($user_data = mysqli_fetch_array($result)) {
     $alamat = $user_data['alamat'];
     $tgl_lahir = $user_data['tgl_lahir'];
 }
-
 ?>
 
-<?php
-$query = "SELECT tipe, harga FROM mobil";
-$result = $con->query($query);
-if ($result->num_rows > 0) {
-    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
 
-?>
 <html>
 <html lang="en">
 
@@ -89,46 +93,37 @@ if ($result->num_rows > 0) {
                 <div class="info-wrap mt-5">
                     <div class="row">
                         <div class="section-title">
-                            <h2>Reservasi</h2>
+                            <h2>Edit User</h2>
                         </div>
                     </div>
                 </div>
 
-                <form action="proses/user_transaksi.php" method="post" class="php-email-form">
+
+                <form action="user_edit.php" method="post" class="php-email-form">
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" value=<?php echo $username; ?> disabled>
+                        <input type="text" class="form-control" name="username" placeholder="Username" value=<?php echo $username; ?>>
                     </div>
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="nama" value=<?php echo $nama; ?> disabled>
+                        <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" value=<?php echo $nama; ?>>
                     </div>
 
                     <div class="input-group mb-3">
-                        <select name="tipe" class="form-control">
-                            <option>Pilih Mobil</option>
-                            <?php
-                            foreach ($options as $option) {
-                            ?>
-                                <option value="<?php echo $option['tipe']; ?>"><?php echo $option['tipe']; ?> </option>
-                            <?php
-                            }
-                            ?>
-                        </select>
+                        <input type="text" class="form-control" name="jenis_kelamin" placeholder="Jenis Kelamin" value=<?php echo $jenis_kelamin; ?>>
                     </div>
-
 
                     <div class="input-group mb-3">
-                        <input type="date" class="form-control" name="tgl_sewa" placeholder="Tanggal Sewa" required>
+                        <input type="text" class="form-control" name="alamat" placeholder="Alamat" value=<?php echo $alamat; ?>>
                     </div>
-                    <input type="hidden" name="id_user" value=<?php echo $id ?>>
 
-                    <input type="hidden" name="nama" value=<?php echo $nama ?>>
-                    <button type="submit" class="text-center">Reservasi</button>
-
-
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir" value=<?php echo $tgl_lahir; ?>>
+                    </div>
+                    <input type="hidden" name="id" value=<?php echo $id ?>>
+                    <button type="submit" class="text-center" name="update" value="update">Update</button>
+                    <a href="index.php">Cancel</a>
                 </form>
-                <a href="index.php"><button class="btn btn-danger">Back</button></a>
             </div>
         </section><!-- End Contact Section -->
 

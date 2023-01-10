@@ -1,37 +1,4 @@
-<?php
-include "koneksi.php";
-$sql = "SELECT * FROM mobil";
-$tampil = mysqli_query($con, $sql);
-
-session_start();
-
-if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
-    header('Location: form_login.php');
-    die();
-}
-
-$id = $_GET['id'];
-// Syntax untuk mengambil data berdasarkan id
-$result = mysqli_query($con, "SELECT * FROM user WHERE id='$id'");
-while ($user_data = mysqli_fetch_array($result)) {
-    $username = $user_data['username'];
-    $nama = $user_data['nama'];
-    $jenis_kelamin = $user_data['jenis_kelamin'];
-    $alamat = $user_data['alamat'];
-    $tgl_lahir = $user_data['tgl_lahir'];
-}
-
-?>
-
-<?php
-$query = "SELECT tipe, harga FROM mobil";
-$result = $con->query($query);
-if ($result->num_rows > 0) {
-    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
-
-?>
-<html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -89,46 +56,20 @@ if ($result->num_rows > 0) {
                 <div class="info-wrap mt-5">
                     <div class="row">
                         <div class="section-title">
-                            <h2>Reservasi</h2>
+                            <h2>RESERVASI SUKSES</h2>
                         </div>
                     </div>
                 </div>
 
-                <form action="proses/user_transaksi.php" method="post" class="php-email-form">
+                <form action="" method="post" class="php-email-form">
 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" value=<?php echo $username; ?> disabled>
-                    </div>
+                    <p>Anda telah <b>Sukses</b> menyewa mobil, silahkan segera menuju showroom untuk mengambil mobil yang anda sewa, dan tunjukkan bukti sewa sebanyak 5x untuk mendapatkan voucher gratis 1x sewa
+                        <br><a href='index.php'>Home</a>
+                        <br><a href='proses/user_logout.php'>Logout</a>
+                    </p>
 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="nama" value=<?php echo $nama; ?> disabled>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <select name="tipe" class="form-control">
-                            <option>Pilih Mobil</option>
-                            <?php
-                            foreach ($options as $option) {
-                            ?>
-                                <option value="<?php echo $option['tipe']; ?>"><?php echo $option['tipe']; ?> </option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control" name="tgl_sewa" placeholder="Tanggal Sewa" required>
-                    </div>
-                    <input type="hidden" name="id_user" value=<?php echo $id ?>>
-
-                    <input type="hidden" name="nama" value=<?php echo $nama ?>>
-                    <button type="submit" class="text-center">Reservasi</button>
-
-
+                    </p>
                 </form>
-                <a href="index.php"><button class="btn btn-danger">Back</button></a>
             </div>
         </section><!-- End Contact Section -->
 

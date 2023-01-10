@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-$sql = "SELECT * FROM mobil";
+$sql = "SELECT * FROM transaksi ORDER BY id";
 $tampil = mysqli_query($con, $sql);
 
 session_start();
@@ -10,27 +10,16 @@ if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
     die();
 }
 
-$id = $_GET['id'];
-// Syntax untuk mengambil data berdasarkan id
-$result = mysqli_query($con, "SELECT * FROM user WHERE id='$id'");
-while ($user_data = mysqli_fetch_array($result)) {
-    $username = $user_data['username'];
-    $nama = $user_data['nama'];
-    $jenis_kelamin = $user_data['jenis_kelamin'];
-    $alamat = $user_data['alamat'];
-    $tgl_lahir = $user_data['tgl_lahir'];
+if ($_SESSION['level'] != 'ADMIN') {
+    header('Location: proses/page_error.php');
+    die();
 }
+
+// Syntax untuk mengambil semua data dari table mahasiswa
+$result = mysqli_query($con, "SELECT * FROM transaksi order by tgl_sewa");
 
 ?>
 
-<?php
-$query = "SELECT tipe, harga FROM mobil";
-$result = $con->query($query);
-if ($result->num_rows > 0) {
-    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
-
-?>
 <html>
 <html lang="en">
 
@@ -87,48 +76,61 @@ if ($result->num_rows > 0) {
 
             <div class="container">
                 <div class="info-wrap mt-5">
+
                     <div class="row">
                         <div class="section-title">
-                            <h2>Reservasi</h2>
+                            <h2>List TRANSAKSI</h2>
                         </div>
                     </div>
                 </div>
 
-                <form action="proses/user_transaksi.php" method="post" class="php-email-form">
+                <!-- <form action="" method="GET" style="margin-top: 1em">
+                    <input style="padding:1em 2em; width:100%;" type="date" name="cari_user" placeholder="Cari Data Berdasarkan Nama" defaultValue="">
+                </form> -->
+                <form action="admin_show_user.php" class="php-email-form">
 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" value=<?php echo $username; ?> disabled>
-                    </div>
+                    <?php
+                    if (isset($_GET['cari_user'])) :
+                        $cari_user = $_GET['cari_user'];
+                        $result = mysqli_query($con, "SELECT * FROM transaksi WHERE tgl_sewa LIKE '%$cari_user%'  ");
+                    endif; ?>
 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="nama" value=<?php echo $nama; ?> disabled>
-                    </div>
+                    <?php if ($result->num_rows > 0) :
 
-                    <div class="input-group mb-3">
-                        <select name="tipe" class="form-control">
-                            <option>Pilih Mobil</option>
+                    ?>
+
+
+                        <table width='80%' border=1 class="table table-striped">
+                            <tr>
+                                <th>Nama Penyewa</th>
+                                <th>Tipe Mobil</th>
+                                <th>Tanggal Sewa</th>
+                            </tr>
                             <?php
-                            foreach ($options as $option) {
-                            ?>
-                                <option value="<?php echo $option['tipe']; ?>"><?php echo $option['tipe']; ?> </option>
-                            <?php
+                            while ($user_data = mysqli_fetch_array($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $user_data['penyewa'] . "</td>";
+                                echo "<td>" . $user_data['nama_mobil'] . "</td>";
+                                echo "<td>" . $user_data['tgl_sewa'] . "</td>";
                             }
                             ?>
-                        </select>
-                    </div>
-
-
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control" name="tgl_sewa" placeholder="Tanggal Sewa" required>
-                    </div>
-                    <input type="hidden" name="id_user" value=<?php echo $id ?>>
-
-                    <input type="hidden" name="nama" value=<?php echo $nama ?>>
-                    <button type="submit" class="text-center">Reservasi</button>
-
+                        </table>
+                    <?php else : ?>
+                        <table width='80%' border=1>
+                            <tr>
+                                <th>Nama Penyewa</th>
+                                <th>Tipe Mobil</th>
+                                <th>Tanggal Sewa</th>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">Data tidak di temukan!</td>
+                            </tr>
+                        </table>
+                    <?php endif; ?>
 
                 </form>
-                <a href="index.php"><button class="btn btn-danger">Back</button></a>
+                <a href="admin_home.php"><button class="btn btn-danger">Back</button></a>
+                <a href="cetak_transaksi.php"><button class="btn btn-primary">Cetak Tabel Transaksi</button></a>
             </div>
         </section><!-- End Contact Section -->
 

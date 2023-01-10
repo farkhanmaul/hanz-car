@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-$sql = "SELECT * FROM mobil";
+$sql = "SELECT * FROM user ORDER BY level";
 $tampil = mysqli_query($con, $sql);
 
 session_start();
@@ -10,28 +10,14 @@ if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
     die();
 }
 
-$id = $_GET['id'];
-// Syntax untuk mengambil data berdasarkan id
-$result = mysqli_query($con, "SELECT * FROM user WHERE id='$id'");
-while ($user_data = mysqli_fetch_array($result)) {
-    $username = $user_data['username'];
-    $nama = $user_data['nama'];
-    $jenis_kelamin = $user_data['jenis_kelamin'];
-    $alamat = $user_data['alamat'];
-    $tgl_lahir = $user_data['tgl_lahir'];
+if ($_SESSION['level'] != 'ADMIN') {
+    header('Location: proses/page_error.php');
+    die();
 }
 
 ?>
 
-<?php
-$query = "SELECT tipe, harga FROM mobil";
-$result = $con->query($query);
-if ($result->num_rows > 0) {
-    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
-
-?>
-<html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -89,46 +75,22 @@ if ($result->num_rows > 0) {
                 <div class="info-wrap mt-5">
                     <div class="row">
                         <div class="section-title">
-                            <h2>Reservasi</h2>
+                            <h2>HALAMAN ADMIN</h2>
                         </div>
                     </div>
                 </div>
 
-                <form action="proses/user_transaksi.php" method="post" class="php-email-form">
+                <form action="" method="post" class="php-email-form">
 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" value=<?php echo $username; ?> disabled>
-                    </div>
+                    <?php
+                    echo "Anda login sebagai <b>Admin</b>";
+                    echo "<br><a href='admin_show_user.php'>Edit User</a>";
+                    echo "<br><a href='admin_show_mobil.php'>Edit Mobil</a>";
+                    echo "<br><a href='admin_show_transaksi.php'>Lihat Transaksi</a>";
+                    echo "<br><a href='proses/user_logout.php'>Logout</a>"; ?>
 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="nama" value=<?php echo $nama; ?> disabled>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <select name="tipe" class="form-control">
-                            <option>Pilih Mobil</option>
-                            <?php
-                            foreach ($options as $option) {
-                            ?>
-                                <option value="<?php echo $option['tipe']; ?>"><?php echo $option['tipe']; ?> </option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control" name="tgl_sewa" placeholder="Tanggal Sewa" required>
-                    </div>
-                    <input type="hidden" name="id_user" value=<?php echo $id ?>>
-
-                    <input type="hidden" name="nama" value=<?php echo $nama ?>>
-                    <button type="submit" class="text-center">Reservasi</button>
-
-
+                    </p>
                 </form>
-                <a href="index.php"><button class="btn btn-danger">Back</button></a>
             </div>
         </section><!-- End Contact Section -->
 

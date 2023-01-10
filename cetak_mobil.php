@@ -10,23 +10,21 @@ $pdf->SetFont('Arial', 'B', 16);
 // mencetak string
 $pdf->Cell(190, 7, 'RENTAL MOBIL PT. HANZ CAR', 0, 1, 'C');
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(190, 7, 'DAFTAR USER PELANGGAN', 0, 1, 'C');
+$pdf->Cell(190, 7, 'DAFTAR TRANSAKSI', 0, 1, 'C');
 // Memberikan space kebawah agar tidak terlalu rapat
 $pdf->Cell(10, 7, '', 0, 1);
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(25, 6, 'USERNAME', 1, 0);
-$pdf->Cell(50, 6, 'NAMA ', 1, 0);
-$pdf->Cell(20, 6, 'J KEL', 1, 0);
-$pdf->Cell(50, 6, 'ALAMAT', 1, 0);
-$pdf->Cell(30, 6, 'TANGGAL LHR', 1, 1);
+$pdf->Cell(35, 6, 'Tipe Mobil', 1, 0);
+$pdf->Cell(55, 6, 'Transmisi ', 1, 0);
+$pdf->Cell(25, 6, 'Tahun', 1, 0);
+$pdf->Cell(25, 6, 'Harga', 1, 1);
 $pdf->SetFont('Arial', '', 10);
 include 'koneksi.php';
-$mahasiswa = mysqli_query($con, "select * from user");
+$mahasiswa = mysqli_query($con, "select * from mobil order by tipe");
 while ($row = mysqli_fetch_array($mahasiswa)) {
-    $pdf->Cell(25, 6, $row['username'], 1, 0);
-    $pdf->Cell(50, 6, $row['nama'], 1, 0);
-    $pdf->Cell(20, 6, $row['jenis_kelamin'], 1, 0);
-    $pdf->Cell(50, 6, $row['alamat'], 1, 0);
-    $pdf->Cell(30, 6, $row['tgl_lahir'], 1, 1);
+    $pdf->Cell(35, 6, $row['tipe'], 1, 0);
+    $pdf->Cell(55, 6, $row['transmisi'], 1, 0);
+    $pdf->Cell(25, 6, $row['tahun'], 1, 0);
+    $pdf->Cell(25, 6, $row['harga'], 1, 1);
 }
 $pdf->Output();

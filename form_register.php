@@ -72,7 +72,11 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="jenis_kelamin" placeholder="Jenis Kelamin" required>
+                        <select name="jenis_kelamin" class="form-control">
+                            <option value="">--Select Gender--</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="W">Perempuan</option>
+                        </select>
                     </div>
 
                     <div class="input-group mb-3">
@@ -91,6 +95,7 @@
                         <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password" required>
                     </div>
                     <button type="submit" class="text-center">Register</button>
+                    <p>Sudah punya akun? <a href="form_login.php">Login</a> </p>
                 </form>
             </div>
         </section><!-- End Contact Section -->

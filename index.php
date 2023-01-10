@@ -11,12 +11,12 @@ if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
 }
 
 if ($_SESSION['level'] == 'ADMIN') {
-  header('Location: admin/admin_home.php');
+  header('Location: admin_home.php');
   die();
 }
 
-// Syntax untuk mengambil semua data dari table mahasiswa
-$result = mysqli_query($con, "SELECT * FROM mobil ");
+$result = mysqli_query($con, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
+
 ?>
 
 
@@ -77,11 +77,14 @@ $result = mysqli_query($con, "SELECT * FROM mobil ");
 
       <nav id="navbar" class="navbar">
         <ul>
+
+          <?php $user_data = mysqli_fetch_array($result)
+          ?>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="about.php">About</a></li>
-          <li><a class="nav-link scrollto" href="form_transaksi.php">Reservasi</a></li>
+          <li><a class="nav-link scrollto" href="form_transaksi.php?id=<?php echo "$user_data[id]\">Reservasi</a></li>" ?>
 
-          <li><a class="nav-link scrollto" href="proses/user_logout.php">Logout</a></li>
+          <li><a class=" nav-link scrollto" href="proses/user_logout.php">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -104,7 +107,7 @@ $result = mysqli_query($con, "SELECT * FROM mobil ");
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Selamat Datang!</h2>
                 <p class="animate__animated ">Silahkan klik Tombol Reservasi di Bawah untuk mulai menyewa mobil kami.</p>
-                <a href="#about" class="btn-get-started scrollto animate__animated ">Reservasi</a>
+                <a href="form_transaksi.php?id=<?php echo "$user_data[id]" ?>" class="btn-get-started scrollto animate__animated ">Reservasi</a>
               </div>
             </div>
           </div>
@@ -115,7 +118,7 @@ $result = mysqli_query($con, "SELECT * FROM mobil ");
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Selamat Datang!</h2>
                 <p class="animate__animated ">Silahkan klik Tombol Reservasi di Bawah untuk mulai menyewa mobil kami.</p>
-                <a href="#about" class="btn-get-started scrollto animate__animated ">Reservasi</a>
+                <a href="form_transaksi.php?id=<?php echo "$user_data[id]" ?>" class="btn-get-started scrollto animate__animated ">Reservasi</a>
               </div>
             </div>
           </div>
@@ -126,7 +129,7 @@ $result = mysqli_query($con, "SELECT * FROM mobil ");
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Selamat Datang!</h2>
                 <p class="animate__animated ">Silahkan klik Tombol Reservasi di Bawah untuk mulai menyewa mobil kami.</p>
-                <a href="#about" class="btn-get-started scrollto animate__animated ">Reservasi</a>
+                <a href="form_transaksi.php?id=<?php echo "$user_data[id]" ?>" class="btn-get-started scrollto animate__animated ">Reservasi</a>
               </div>
             </div>
           </div>

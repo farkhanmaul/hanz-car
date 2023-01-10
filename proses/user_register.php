@@ -6,7 +6,6 @@ $nama = $_POST['nama'];
 $jenis_kelamin = $_POST['jenis_kelamin'];
 $alamat = $_POST['alamat'];
 $tgl_lahir = $_POST['tgl_lahir'];
-
 $password = md5($_POST['password']);
 $level = $_POST['level'];
 
