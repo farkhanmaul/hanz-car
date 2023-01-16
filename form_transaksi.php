@@ -128,7 +128,7 @@ if ($result->num_rows > 0) {
                                 <th>Tanggal Sewa</th>
                             </tr>
                             <tr>
-                                <td colspan=" 3" align="center">-Belum ada transaksi-</td>
+                                <td colspan=" 3" align="center">Belum ada riwayat transaksi</td>
                             </tr>
                         </table>
                     <?php endif; ?>

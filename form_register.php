@@ -50,7 +50,7 @@
 
     <main id="main">
         <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
+        <section id="contact" class="contact" style="width: 40%; margin: auto;">
 
             <div class="container">
                 <div class="info-wrap mt-5">
@@ -95,7 +95,7 @@
                         <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password" required>
                     </div>
                     <button type="submit" class="text-center">Register</button>
-                    <p>Sudah punya akun? <a href="form_login.php">Login</a> </p>
+                    <p style="padding-top: 10px;">Sudah punya akun? <a href=" form_login.php">Login</a> </p>
                 </form>
             </div>
         </section><!-- End Contact Section -->
