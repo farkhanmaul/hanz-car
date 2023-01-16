@@ -50,7 +50,7 @@
 
   <main id="main">
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" style="width: 40%; margin: auto;">
 
       <div class="container">
         <div class="info-wrap mt-5">
@@ -77,7 +77,7 @@
           <input type="password" id="inputPassword5" class="form-control">-->
           <button type="submit" class="text-center">Login</button>
 
-          <p>Belum punya akun? <a href="form_register.php">Register</a> </p>
+          <p style="padding-top: 10px;">Belum punya akun? <a href="form_register.php">Register</a> </p>
         </form>
       </div>
     </section><!-- End Contact Section -->
