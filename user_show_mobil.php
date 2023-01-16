@@ -87,6 +87,10 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
     </div>
   </header><!-- End Header -->
 
+  <section id="about">
+
+  </section><!-- End Hero -->
+
   <main id="main">
 
     <!-- ======= Portfolio Section ======= -->
