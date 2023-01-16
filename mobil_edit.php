@@ -4,6 +4,7 @@ include_once("koneksi.php");
 
 // Perkondisian untuk mengecek apakah tombol submit sudah ditekan.
 if (isset($_POST['update'])) {
+    $id = $_POST['id'];
     $tipe = $_POST['tipe'];
     $transmisi = $_POST['transmisi'];
     $tahun = $_POST['tahun'];
@@ -91,7 +92,7 @@ while ($user_data = mysqli_fetch_array($result)) {
                 <div class="info-wrap mt-5">
                     <div class="row">
                         <div class="section-title">
-                            <h2>Edit User</h2>
+                            <h2>Edit Mobil</h2>
                         </div>
                     </div>
                 </div>
@@ -117,7 +118,7 @@ while ($user_data = mysqli_fetch_array($result)) {
 
                     <input type="hidden" name="id" value=<?php echo $id ?>>
                     <button type="submit" class="text-center" name="update" value="update">Update</button>
-                    <a href="index.php">Cancel</a>
+                    <a href="admin_show_mobil.php">Cancel</a>
                 </form>
             </div>
         </section><!-- End Contact Section -->

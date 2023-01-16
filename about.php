@@ -80,8 +80,8 @@ $result = mysqli_query($con, "SELECT * FROM user WHERE username = '$_SESSION[use
 
                     <?php $user_data = mysqli_fetch_array($result)
                     ?>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="about.php">About</a></li>
+                    <li><a class="nav-link scrollto" href="index.php">Home</a></li>
+                    <li><a class="nav-link scrollto" active href="about.php">About</a></li>
                     <li><a class="nav-link scrollto" href="user_show_mobil.php">Daftar Mobil</a></li>
                     <li><a class="nav-link scrollto" href="form_transaksi.php?id=<?php echo "$user_data[id]\">Reservasi</a></li>" ?>
 
@@ -108,18 +108,15 @@ $result = mysqli_query($con, "SELECT * FROM user WHERE username = '$_SESSION[use
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
                         <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum
+                            Hanz Car merupakan jasa sewa mobil terbaik se-Indonesia, Kami Menyediakan service terbaik untuk anda. Kami sudah berpengalaman menyediakan jasa sewa mobil selama lebih dari 10 tahun.
                         </p>
                         <ul>
-                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
-                            <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
+                            <li><i class="ri-check-double-line"></i> Pelayanan Cepat</li>
+                            <li><i class="ri-check-double-line"></i> Armada Memadai</li>
+                            <li><i class="ri-check-double-line"></i> Bonus melimpah untuk pelanggan</li>
                         </ul>
                         <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.
+                            Kami adalah penyedia jasa sewa mobil terbaik se-Indonesia.
                         </p>
                     </div>
                 </div>

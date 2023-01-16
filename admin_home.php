@@ -84,10 +84,10 @@ if ($_SESSION['level'] != 'ADMIN') {
 
                     <p>Anda login sebagai <b>Admin</b></p>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href='admin_show_user.php'><button type="button" class="btn btn-primary">Edit User</button></a>
-                        <a href='admin_show_mobil.php'><button type="button" class="btn btn-primary">Edit Mobil</button></a>
-                        <a href='admin_show_transaksi.php'><button type="button" class="btn btn-primary">Lihat Transaksi</button></a>
-                        <a href='proses/user_logout.php'><button type="button" class="btn btn-danger">Logout</button></a>
+                        <a href='admin_show_user.php'><button type="button" class="btn btn-primary" style="margin: 5px">Edit User</button></a>
+                        <a href='admin_show_mobil.php'><button type="button" class="btn btn-primary" style="margin: 5px">Edit Mobil</button></a>
+                        <a href='admin_show_transaksi.php'><button type="button" class="btn btn-primary" style="margin: 5px">Lihat Transaksi</button></a>
+                        <a href='proses/user_logout.php'><button type="button" class="btn btn-danger" style="margin: 5px">Logout</button></a>
                     </div>
                     </p>
                 </form>

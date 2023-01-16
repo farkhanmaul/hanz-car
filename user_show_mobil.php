@@ -74,7 +74,7 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
 
                     <div class="row">
                         <div class="section-title">
-                            <h2>List User</h2>
+                            <h2>List Mobil</h2>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
                     <?php
                     if (isset($_GET['cari_user'])) :
                         $cari_user = $_GET['cari_user'];
-                        $result = mysqli_query($con, "SELECT * FROM mobil WHERE tipe LIKE '%$cari_user%'  ");
+                        $result = mysqli_query($con, "SELECT * FROM mobil WHERE tipe LIKE '%$cari_user%' order by tipe ASC ");
                     endif; ?>
 
                     <?php if ($result->num_rows > 0) :

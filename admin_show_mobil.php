@@ -91,7 +91,7 @@ $result = mysqli_query($con, "SELECT * FROM mobil order by tipe ");
                     <?php
                     if (isset($_GET['cari_user'])) :
                         $cari_user = $_GET['cari_user'];
-                        $result = mysqli_query($con, "SELECT * FROM mobil WHERE tipe LIKE '%$cari_user%'  ");
+                        $result = mysqli_query($con, "SELECT * FROM mobil WHERE tipe LIKE '%$cari_user%' order by tipe ASC");
                     endif; ?>
 
                     <?php if ($result->num_rows > 0) :

@@ -21,9 +21,16 @@ while ($user_data = mysqli_fetch_array($result)) {
     $tgl_lahir = $user_data['tgl_lahir'];
 }
 
+$sql = "SELECT * FROM transaksi where id=$id";
+$tampil = mysqli_query($con, $sql);
+// Syntax untuk mengambil semua data dari table mahasiswa
+$result1 = mysqli_query($con, "SELECT * FROM transaksi WHERE penyewa='$username' order by tgl_sewa");
+
 ?>
 
 <?php
+
+
 $query = "SELECT tipe, harga FROM mobil";
 $result = $con->query($query);
 if ($result->num_rows > 0) {
@@ -73,8 +80,6 @@ if ($result->num_rows > 0) {
                 <h1><a href="index.php">Hanz<span>Car</span></a></h1>
                 <div class="container">
                 </div>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
 
 
@@ -93,6 +98,43 @@ if ($result->num_rows > 0) {
                         </div>
                     </div>
                 </div>
+                <form action="" class="php-email-form">
+
+                    <?php if ($result1->num_rows > 0) :
+
+                    ?>
+
+
+                        <table width='80%' border=1 class="table table-striped">
+                            <tr>
+                                <th>Riwayat Transaksi</th>
+                                <th>Tipe Mobil</th>
+                                <th>Tanggal Sewa</th>
+                            </tr>
+                            <?php
+                            while ($user_data = mysqli_fetch_array($result1)) {
+                                echo "<tr>";
+                                echo "<td>" . $user_data['penyewa'] . "</td>";
+                                echo "<td>" . $user_data['nama_mobil'] . "</td>";
+                                echo "<td>" . $user_data['tgl_sewa'] . "</td>";
+                            }
+                            ?>
+                        </table>
+                    <?php else : ?>
+                        <table width='80%' border=1 class="table table-striped">
+                            <tr>
+                                <th>Riwayat Transaksi</th>
+                                <th>Tipe Mobil</th>
+                                <th>Tanggal Sewa</th>
+                            </tr>
+                            <tr>
+                                <td colspan=" 3" align="center">-Belum ada transaksi-</td>
+                            </tr>
+                        </table>
+                    <?php endif; ?>
+
+                </form>
+
 
                 <form action="proses/user_transaksi.php" method="post" class="php-email-form">
 
