@@ -13,7 +13,10 @@ if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
 $id = $_GET['id'];
 // Syntax untuk mengambil data berdasarkan id
 $result = mysqli_query($con, "SELECT * FROM user WHERE id='$id'");
+
+// Syntax untuk mengambil semua data dari table mahasiswa
 while ($user_data = mysqli_fetch_array($result)) {
+    $id = $user_data['id'];
     $username = $user_data['username'];
     $nama = $user_data['nama'];
     $jenis_kelamin = $user_data['jenis_kelamin'];
@@ -21,20 +24,16 @@ while ($user_data = mysqli_fetch_array($result)) {
     $tgl_lahir = $user_data['tgl_lahir'];
 }
 
-$sql = "SELECT * FROM transaksi where id=$id";
-$tampil = mysqli_query($con, $sql);
-// Syntax untuk mengambil semua data dari table mahasiswa
-$result1 = mysqli_query($con, "SELECT * FROM transaksi WHERE penyewa='$username' order by tgl_sewa");
+$result1 = mysqli_query($con, "SELECT * FROM transaksi WHERE penyewa='$nama' order by tgl_sewa");
 
 ?>
 
 <?php
 
-
 $query = "SELECT tipe, harga FROM mobil";
-$result = $con->query($query);
-if ($result->num_rows > 0) {
-    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$result3 = $con->query($query);
+if ($result3->num_rows > 0) {
+    $options = mysqli_fetch_all($result3, MYSQLI_ASSOC);
 }
 
 ?>
@@ -112,11 +111,11 @@ if ($result->num_rows > 0) {
                                 <th>Tanggal Sewa</th>
                             </tr>
                             <?php
-                            while ($user_data = mysqli_fetch_array($result1)) {
+                            while ($transaksi_data = mysqli_fetch_array($result1)) {
                                 echo "<tr>";
-                                echo "<td>" . $user_data['penyewa'] . "</td>";
-                                echo "<td>" . $user_data['nama_mobil'] . "</td>";
-                                echo "<td>" . $user_data['tgl_sewa'] . "</td>";
+                                echo "<td>" . $transaksi_data['penyewa'] . "</td>";
+                                echo "<td>" . $transaksi_data['nama_mobil'] . "</td>";
+                                echo "<td>" . $transaksi_data['tgl_sewa'] . "</td>";
                             }
                             ?>
                         </table>

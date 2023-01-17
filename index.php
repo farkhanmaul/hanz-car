@@ -10,6 +10,7 @@ if (!isset($_SESSION['username']) and !isset($_SESSION['username'])) {
   die();
 }
 
+$id = $_GET['id'];
 if ($_SESSION['level'] == 'ADMIN') {
   header('Location: admin_home.php');
   die();
