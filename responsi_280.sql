@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2023 at 05:19 AM
+-- Generation Time: Jun 24, 2023 at 08:16 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -78,7 +78,12 @@ INSERT INTO `transaksi` (`id`, `penyewa`, `nama_mobil`, `tgl_sewa`) VALUES
 (11, 'User', 'Toyota Alphard', '2023-01-17'),
 (12, 'User', 'Toyota Alphard', '2023-01-26'),
 (13, 'User', 'Toyota Alphard', '2023-01-18'),
-(14, 'User', 'Ferrari Lamborgini', '2023-01-31');
+(14, 'User', 'Ferrari Lamborgini', '2023-01-31'),
+(15, 'User', 'Honda Civic Type R', '2023-01-25'),
+(16, 'andidingding', 'Ferrari Lamborgini', '2023-02-01'),
+(17, 'User', 'Honda Brio Satya 1.2 CVT', '2023-02-01'),
+(18, '', '', '0000-00-00'),
+(19, 'andidingding', 'Ferrari Lamborgini', '2023-01-26');
 
 -- --------------------------------------------------------
 
@@ -109,7 +114,8 @@ INSERT INTO `user` (`id`, `username`, `nama`, `jenis_kelamin`, `alamat`, `tgl_la
 (27, 'lali', 'lalilu', 'L', 'Jakarta', '2023-01-27', '443099d7d69bb4a92aa9db7547c216dd', 'USER'),
 (29, 'budi', 'budiarto', 'L', 'Surabaya', '2023-01-10', '00dfc53ee86af02e742515cdcf075ed3', 'USER'),
 (30, 'fafa', 'fafafifiui', 'W', 'Frindavan', '2023-01-17', '05d251ea28c5be9426611a121db0c92a', 'USER'),
-(31, 'lolo', 'Lololi', 'W', 'Jogja', '2023-01-09', 'd6581d542c7eaf801284f084478b5fcc', 'USER');
+(31, 'lolo', 'Lololi', 'W', 'Jogja', '2023-01-09', 'd6581d542c7eaf801284f084478b5fcc', 'USER'),
+(32, 'andi', 'andidingding', 'W', 'Lampung', '2023-01-03', 'ce0e5bf55e4f71749eade7a8b95c4e46', 'USER');
 
 --
 -- Indexes for dumped tables
@@ -148,13 +154,13 @@ ALTER TABLE `mobil`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
